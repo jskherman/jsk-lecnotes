@@ -1,7 +1,7 @@
-#import "@local/jsk-lecnotes:0.1.0": *
+#import "../template.typ": *
 
 = Introduction $e^(pi i)$
-*Scientific writing* is a _crucial_ part of the research process, allowing researchers to share their findings with the wider scientific community. However, the process of typesetting scientific documents can often be a frustrating and time-consuming affair, particularly when using outdated tools such as LaTeX. Despite being over 30 years old, it remains a popular choice for scientific writing due to its power and flexibility. However, it also comes with a steep learning curve, complex syntax, and long compile times, leading to frustration and despair for many researchers. //@netwok2020
+Can you then _suppose_ that those heroic men performed their famous deeds *without any motive at all*? In a free hour, when our power of choice is untrammeled and when nothing prevents our being able to do what we like best, _*every pleasure is to be welcomed and every pain avoided*_. No one rejects, dislikes or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. @netwok2020
 
 - But in certain emergencies and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted.
   - #lorem(25)
@@ -11,14 +11,14 @@
 
 == Paper overview
 
-In this paper we introduce Typst, a new typesetting system designed to streamline the scientific writing process and provide researchers with a fast, efficient, and easy-to-use alternative to existing systems. Our goal is to shake up the status quo and offer researchers a better way to approach scientific writing.
+This being the theory I hold, why need I be afraid of not being able to reconcile it with the case of my ancestors? On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of the pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. 
 
 #blockquote[
   Euler's identity is $e^(pi i) + 1 = 0$. Do you really believe that they charged an armed enemy, or treated their children, their own flesh and blood, so cruelly, without a thought for their own interest or advantage?
   $ i planck.reduce frac(diff, diff t) Psi lr((x comma t)) eq lr([minus frac(planck.reduce^2, 2 m) frac(diff^2, diff x^2) plus V lr((x comma t))]) Psi lr((x comma t)) $
 ]
 
-By leveraging advanced algorithms and a user-friendly interface, Typst offers several advantages over existing typesetting systems, including faster document creation, simplified syntax, and increased ease-of-use to where `variable` and `print()` shall be of use.
+But I must explain to you how all this mistaken idea of reprobating pleasure and extolling pain arose. Can you then suppose that those heroic men performed their famous deeds without any motive at all? Your references to them just now were historically correct, and also showed your kind and friendly feeling towards myself; but all the same I am not to be bribed by your flattery of my family, and you will not find me a less resolute opponent. Increase ease-of-use to where `variable` and `print()` shall be of use.
 
 #figure(
   caption: "Example code"
@@ -35,7 +35,7 @@ print("This is a long sentence where I ramble until I get 80 characters here.")
 ```
 ]
 
-To demonstrate the potential of Typst, we conducted a series of experiments comparing it to other popular typesetting systems, including LaTeX. Our findings suggest that Typst offers several benefits for scientific writing, particularly for novice users who may struggle with the complexities of LaTeX. Additionally, we demonstrate that Typst offers advanced features for experienced users, allowing for greater customization and flexibility in document creation.
+On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of the pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? 
 
 1. On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of the pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.
 

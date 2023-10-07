@@ -1,13 +1,12 @@
                                         
-#import "@local/jsk-lecnotes:0.1.0": *  // or copy `src/template.typ` and use
-                                        // import "template.typ": *`
+#import "template.typ": *
 #show: template.with(
-  title: [Martingales, Brownian Motion,\ Ergodic Theory],
+  title: [Quantum Mechanics, Brownian Motion,\ Ergodic Theory],
   short-title: "ChE Calculations 101",
   description: [
-    Notes based on lectures for Math 6720 (Probability Theory II)\ at Cornell by Professor Lionel Levine, Spring 2020
+    Notes based on lectures for Phys 123 (Statistical Mechanics II)\ at Bicol University by Professor John Doe, Spring 2020
   ],
-  // date: datetime(year: 2020, month: 4, day: 1),
+  date: datetime(year: 2023, month: 10, day: 01),
   authors: (
     (
       name: "Je Sian Keith Herman",
@@ -23,7 +22,7 @@
   lof: false,
   lot: false,
   lol: false,
-  // bibliography-file: "refs.bib",
+  bibliography-file: "refs.bib",
   paper-size: "a4",
   columns: 1,
   text-font: "XCharter",
