@@ -1,0 +1,7 @@
+[package]
+name = "jsk-lecnotes"
+version = "0.1.0"
+entrypoint = "src/lib.typ"
+authors = ["Je Sian Keith Herman <https://github.com/jskherman>"]
+license = "Apache-2.0"
+description = "A template for lecture notes."
