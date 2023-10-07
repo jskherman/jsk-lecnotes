@@ -1,4 +1,6 @@
-#import "@local/jsk-lecnotes:0.1.0": *
+                                        
+#import "@local/jsk-lecnotes:0.1.0": *  // or copy `src/template.typ` and use
+                                        // import "template.typ": *`
 #show: template.with(
   title: [Martingales, Brownian Motion,\ Ergodic Theory],
   short-title: "ChE Calculations 101",
