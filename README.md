@@ -2,7 +2,7 @@
 
 This is a lecture notes template that uses Typst to generate a PDF document. This is based off of [Sara Venkatraman](https://github.com/sara-venkatraman)'s [lecture notes template in LaTeX](https://github.com/sara-venkatraman/LaTeX-Templates#lecture-notes).
 
-There are some custom functions that are defined in the [`template.typ`](./template.typ) file that are used to add some markup. Additionally, here is [a link to Typst snippets files for VS Code and Vim/Neovim](https://www.jskherman.com/blog/typst-snippets/) that I converted from [Gilles Castel's LaTeX snippets](https://castel.dev/post/lecture-notes-1/) to make writing math in Typst more convenient.
+There are some custom functions that are defined in the [`template.typ`](./template.typ) file that are used to add some markup. Additionally, here is [a link to Typst snippets files for VS Code and Vim/Neovim](https://www.jskherman.com/blog/typst-snippets/) converted from [Gilles Castel's LaTeX snippets](https://castel.dev/post/lecture-notes-1/) to make writing math in Typst more convenient.
 
 ## Preview
 
