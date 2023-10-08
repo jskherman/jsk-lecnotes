@@ -2,7 +2,7 @@
 #import "template.typ": *
 #show: template.with(
   title: [Quantum Mechanics, Brownian Motion,\ Ergodic Theory],
-  short-title: "Phys 123",
+  short_title: "Phys 123",
   description: [
     Notes based on lectures for Phys 123 (Statistical Mechanics II)\ at Bicol University by Professor John Doe, Spring 2020
   ],
@@ -22,11 +22,11 @@
   lof: false,
   lot: false,
   lol: false,
-  bibliography-file: "refs.bib",
-  paper-size: "a4",
+  bibliography_file: "refs.bib",
+  paper_size: "a4",
   columns: 1,
-  text-font: "XCharter",
-  code-font: "Cascadia Mono",
+  text_font: "XCharter",
+  code_font: "Cascadia Mono",
   accent: "#DC143C", // blue
 )
 

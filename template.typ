@@ -11,8 +11,8 @@
   // The title of the lecture notes
   title: "Lecture Notes Title",
 
-  // The short-title is shown in the running header
-  short-title: none, // string
+  // The short_title is shown in the running header
+  short_title: none, // string
 
   // The description of the lecture notes; is optional. Example:
   // description: [A template for lecture notes]
@@ -44,17 +44,17 @@
   lol: false,
 
   // The path to a bibliography file if you want to cite some external works.
-  bibliography-file: none,
+  bibliography_file: none,
 
   // The article's paper size. Also affects the margins.
-  paper-size: "a4",
+  paper_size: "a4",
 
   // The number of columns to be used in the page
   columns: 1,
 
   // The text and code font. Must be a valid font name.
-  text-font: "Linux Libertine",
-  code-font: "DejaVu Sans Mono",
+  text_font: "Linux Libertine",
+  code_font: "DejaVu Sans Mono",
 
   // The color of the lecture notes' accent color. Must be a valid HEX color.
   accent: "#DC143C",
@@ -101,12 +101,12 @@
   set par(justify: false)
 
   // Set the text and code font
-  set text(font: text-font, size: 10pt)
-  show raw: set text(font: code-font)
+  set text(font: text_font, size: 10pt)
+  show raw: set text(font: code_font)
 
   // Configure the page.
   set page(
-    paper: paper-size,
+    paper: paper_size,
     columns: columns,
     numbering: "1 / 1",
     number-align: center,
@@ -118,7 +118,7 @@
       // 72pt
       // (x: 1.25in, y: 1in)
     },
-    // if paper-size == "a4" {
+    // if paper_size == "a4" {
     //   (x: 41.5pt, top: 80.51pt, bottom: 89.51pt)
     //   } else {
     //     (
@@ -133,19 +133,15 @@
         selector(heading.where(level: 1)).before(loc),
         loc,
       )
-      let head-title = text(fill: accent_color)[
-        #if short-title != none {
-          short-title
-        } else {
-          title
-        }
+      let head_title = text(fill: accent_color)[
+        #if short_title != none { short_title } else { str_title }
       ]
       if elems == () {
         align(right, "")
       } else {
         let body = elems.last().body
-        head-title + h(1fr) + emph(body)
-        v(6pt, weak: true)
+        head_title + h(1fr) + emph(body)
+        v(-8pt)
         line(length: 100%, stroke: (thickness: 1pt, paint: accent_color, dash: "solid"))
       }
     })
@@ -324,9 +320,9 @@
   v(24pt, weak: true)
 
   // Display bibliography.
-  if bibliography-file != none {
+  if bibliography_file != none {
     show bibliography: set text(8pt)
-    bibliography(bibliography-file, title: text(10pt)[References], style: "apa")
+    bibliography(bibliography_file, title: text(10pt)[References], style: "apa")
   }
 }
 
