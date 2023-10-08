@@ -2,7 +2,7 @@
 #import "template.typ": *
 #show: template.with(
   title: [Quantum Mechanics, Brownian Motion,\ Ergodic Theory],
-  short-title: "ChE Calculations 101",
+  short-title: "Phys 123",
   description: [
     Notes based on lectures for Phys 123 (Statistical Mechanics II)\ at Bicol University by Professor John Doe, Spring 2020
   ],
