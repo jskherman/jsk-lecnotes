@@ -9,8 +9,8 @@ There are some custom functions that are defined in the [`template.typ`](./templ
 See [example PDF](https://github.com/jskherman/jsk-lecnotes/releases/latest/download/example.pdf) in the Releases section.
 
 <a href="https://github.com/jskherman/jsk-lecnotes/releases/latest/download/example.pdf">
-<img src="https://github.com/jskherman/jsk-lecnotes/assets/68434444/069bbd08-5ffd-4176-b6db-798d31037ce1" width="400"/>
-<img src="https://github.com/jskherman/jsk-lecnotes/assets/68434444/2b581fd5-e169-47f5-a923-5a85689e47f2" width="400"/>
+<img src="https://github.com/jskherman/jsk-lecnotes/assets/68434444/670d66c6-377b-4eea-bb6d-38ace128a66e" width="400"/>
+<img src="https://github.com/jskherman/jsk-lecnotes/assets/68434444/1eb03907-80c8-4803-8cf8-c23141b0938c" width="400"/>
 </a>
 
 ## Usage
