@@ -141,7 +141,7 @@
       } else {
         let body = elems.last().body
         head_title + h(1fr) + emph(body)
-        v(-8pt)
+        v(-7pt)
         line(length: 100%, stroke: (thickness: 1pt, paint: accent_color, dash: "solid"))
       }
     })
