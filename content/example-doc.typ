@@ -1,7 +1,7 @@
 #import "../template.typ": *
 
 = Introduction
-Can you then _suppose_ that those heroic men performed their famous deeds *without any motive at all*? In a free hour, when our power of choice is untrammeled and when nothing prevents our being able to do what we like best, _*every pleasure is to be welcomed and every pain avoided*_. @netwok2020
+Can you then _suppose_ that those heroic men performed their famous deeds *without any motive at all*? In a free hour, when our power of choice is untrammeled and when nothing prevents our being able to do what we like best, _*every pleasure is to be welcomed and every pain avoided*_ @netwok2020.
 
 - But in certain emergencies and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted.
   - #lorem(25)
@@ -9,18 +9,21 @@ Can you then _suppose_ that those heroic men performed their famous deeds *witho
 
 == Paper overview
 
-On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of the pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain. 
+On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of the pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.
 
 #blockquote[
-  Euler's identity is $e^(pi i) + 1 = 0$. Do you really believe that they charged an armed enemy, or treated their children, their own flesh and blood, so cruelly, without a thought for their own interest or advantage?
-  $ i planck.reduce frac(diff, diff t) Psi lr((x comma t)) eq lr([minus frac(planck.reduce^2, 2 m) frac(diff^2, diff x^2) plus V lr((x comma t))]) Psi lr((x comma t)) $
+  Euler's identity is $e^(pi i) + 1 = 0$. Do you really believe that they charged an armed enemy, or treated their children, their own flesh and blood, so cruelly, without a thought for their own interest or advantage? Such is Schrödinger's equation in @schrodinger:
+
+  $ i planck.reduce frac(diff, diff t) Psi lr((x comma t)) eq lr([minus frac(planck.reduce^2, 2 m) frac(diff^2, diff x^2) plus V lr((x comma t))]) Psi lr((x comma t)) $ <schrodinger>
+
+  #blockquote[
+    But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?
+  ]
 ]
 
 But I must explain to you how all this mistaken idea of reprobating pleasure and extolling pain arose. Increase ease-of-use to where `variable` and `print()` shall be of use.
 
-#figure(
-  caption: "Example code"
-)[
+#figure(caption: [Example `python` code printing text.])[#sourcecode(
 ```python
 if a != b:
   print("Hello world!")
@@ -29,9 +32,10 @@ else if a == b:
 else:
   print("This is a long sentence where I ramble until I get 80 characters here.")
 ```
-]
+)] <py-test>
 
-To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? 
+
+To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? @stokes has a nice example.
 
 1. On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of the pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.
 
@@ -39,14 +43,25 @@ To take a trivial example, which of us ever undertakes laborious physical exerci
 
 2. #lorem(25)
 
+  1. #lorem(25)
+
+  2. #lorem(25)
+
+#sectionline
+
 = $e^(pi i)$ Methods
-The mechanical energy equation is obtained by integrating the Euler equation along a streamline, and is given by:
 
-$ P_1 + alpha_(1) (rho v_1^2)/(2) + rho g z_1 = P_2 + alpha_(2) (rho v_2^2)/(2) + rho g z_2 + w_s $
+#definition(
+  "Stokes' theorem",
+  footer: "Information extracted from a well-known public encyclopedia"
+)[
+  Let $Sigma$ be a smooth oriented surface in $RR^3$ with boundary $diff Sigma
+  equiv Gamma$. If a vector field $iboxed(bold(F)(x,y,z))=(F_x (x,y,z), F_y (x,y,z),
+  F_z (x,y,z))$ is defined and has continuous first order partial derivatives
+  in a region containing $Sigma$, then
 
-The million dollar equation and the solution that will revolutionize the world of science and technology pertaining to fluids is the Navier-Stokes equation. It is a set of coupled differential equations that describe the motion of fluids. The Navier-Stokes equation is given by:
-
-$ nabla dot u &= 0 \
-- nabla p + mu nabla^2 u + bold(upright(F)) &= overbrace(dboxed(rho (d u)/(d t)), "stress") $ 
+  $ integral.double_Sigma (bold(nabla) times bold(F)) dot bold(Sigma) =
+  dboxed(integral.cont_(diff Sigma) bold(F) dot dif bold(Gamma)) $ 
+] <stokes>
 
 #lorem(50)

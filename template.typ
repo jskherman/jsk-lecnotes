@@ -1,35 +1,47 @@
+// Imports =============================================================
+
 #import "@preview/whalogen:0.1.0": ce
-// #import "@preview/codelst:1.0.0": sourcecode, codelst
+#import "@preview/codelst:1.0.0": sourcecode, codelst
+#import "@preview/showybox:2.0.1": showybox
+#import "@preview/ctheorems:1.0.0": *
+
+// Template ============================================================
 
 #let template(
   // The title of the lecture notes
   title: "Lecture Notes Title",
 
   // The short-title is shown in the running header
-  short-title: none,
+  short-title: none, // string
 
-  // The description of the lecture notes, is optional
+  // The description of the lecture notes; is optional. Example:
   // description: [A template for lecture notes]
   description: none,
 
-  // The date of the lecture notes, is optional
+  // The date of the lecture notes; is optional. Example
+  // datetime(year: 2020, month: 02, day: 02)
   date: none,
 
   // An array of authors. For each author you can specify a name, orcid, and affiliations.
   // affiliations should be content, e.g. "1", which is shown in superscript and should match the affiliations list.
   // Everything but but the name is optional.
-  authors: (),
+  authors: (
+      // name: "",
+      // orcid: "",
+      // link: "",
+      // affiliations: "1,2",
+  ),
 
   // This is the affiliations list. Include an id and `name` in each affiliation. These are shown below the authors.
-  affiliations: (),
+  affiliations: (
+    // (id: "1", name: "Organization 1"),
+    // (id: "2", name: "Organization 2"),
+  ),
 
-  // Enable or disable the list of figures and list of tables.
+  // Enable/disable the list of figures, tables, and listings.
   lof: false,
   lot: false,
   lol: false,
-
-  // The short-citation is shown in the running header, if set to auto it will show the author(s) and the year in APA format.
-  short-citation: auto,
 
   // The path to a bibliography file if you want to cite some external works.
   bibliography-file: none,
@@ -52,6 +64,9 @@
 
 ) = {
 
+  // Necessary for ctheorems package
+  show: thmrules
+
   // Logos
   let orcidSvg = ```<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24"> <path fill="#AECD54" d="M21.8,12c0,5.4-4.4,9.8-9.8,9.8S2.2,17.4,2.2,12S6.6,2.2,12,2.2S21.8,6.6,21.8,12z M8.2,5.8c-0.4,0-0.8,0.3-0.8,0.8s0.3,0.8,0.8,0.8S9,7,9,6.6S8.7,5.8,8.2,5.8z M10.5,15.4h1.2v-6c0,0-0.5,0,1.8,0s3.3,1.4,3.3,3s-1.5,3-3.3,3s-1.9,0-1.9,0H10.5v1.1H9V8.3H7.7v8.2h2.9c0,0-0.3,0,3,0s4.5-2.2,4.5-4.1s-1.2-4.1-4.3-4.1s-3.2,0-3.2,0L10.5,15.4z"/></svg>```.text
 
@@ -66,7 +81,6 @@
   }
 
   // Construct string title from title content
-
   let str_title = ""
 
   if type(title) == content and title.has("children") {
@@ -138,7 +152,7 @@
   )
 
   // Configure equation numbering and spacing.
-  set math.equation(numbering: "[1]")
+  set math.equation(numbering: "[1.1]")
   show math.equation: eq => {
     set block(spacing: 0.65em)
     eq
@@ -159,16 +173,16 @@
   show raw.where(
     block: false,
   ): it => box(fill: luma(240), inset: (x: 2pt), outset: (y: 3pt), radius: 1pt)[#it]
-  show raw.where(
-    block: true,
-  ): it => block(
-      breakable: false,
-      width: 100%,
-      fill: luma(240),
-      radius: 4pt,
-      inset: (x: 1.5em, y: 1em)
-    )[#it]
-  // show: codelst(reversed: true)
+  // show raw.where(
+  //   block: true,
+  // ): it => block(
+  //     breakable: false,
+  //     width: 100%,
+  //     fill: luma(240),
+  //     radius: 4pt,
+  //     inset: (x: 1.5em, y: 1em)
+  //   )[#it]
+  show: codelst(reversed: true)
 
   // Configure figures
   // set figure(placement: auto)
@@ -183,7 +197,6 @@
   }
 
   // Display the paper's title and description.
-  // v(4mm, weak: true)
   align(center, [
     #set text(18pt, weight: "bold")
     #title
@@ -195,8 +208,6 @@
     ])
   }
   v(18pt, weak: true)
-
-  // TODO: Display the authors list
 
   // Authors and affiliations
   align(center)[
@@ -302,13 +313,10 @@
     )
   ]
   
-  // set page(columns: 2)
-
   v(24pt, weak: true)
 
   // Set paragraph to be justified and set linebreaks
   set par(justify: true, linebreaks: "optimized", leading: 0.8em)
-
 
   // Display the lecture notes' content.
   body
@@ -322,25 +330,184 @@
   }
 }
 
+// Functions ===========================================================
+
 // Configure blockquotes.
-#let blockquote(content) = [
-  #set text(size: 0.9em)
-  #pad(x: 5%)[
+#let blockquote(cite: none, body) = [
+  #set text(size: 0.97em)
+  #pad(left: 1.5em)[
     #block(
-    breakable: false,
+    breakable: true,
     width: 100%,
-    fill: luma(240),
-    radius: 4pt,
-    inset: (x: 1.5em, y: 1em)
-    )[#content]
+    fill: gray.lighten(90%),
+    radius: (left: 0pt, right: 5pt),
+    stroke: (left: 5pt + gray, rest: 1pt + silver),
+    inset: 1em
+    )[#body]
   ]
 ]
 
+
 // Configure horizontal ruler
-#let horizontalrule = [#line(start: (20%,0%), end: (80%,0%))]
+#let horizontalrule = [#v(0.5em) #line(start: (20%,0%), end: (80%,0%)) #v(0.5em)]
 
 // Configure alternative horizontal ruler
-#let sectionline = align(center)[* \* #sym.space.quad \* #sym.space.quad \* *]
+#let sectionline = align(center)[#v(0.5em) * \* #sym.space.quad \* #sym.space.quad \* * #v(0.5em)]
 
-#let dboxed(con) = box(stroke: black, outset: (x: 2pt), inset: (y: 8pt), baseline: 11pt, $display(#con)$)
-#let iboxed(con) = box(stroke: black, outset: (x: 2pt), inset: (y: 3pt), baseline: 2pt, $#con$)
+// Attempt to add \boxed{} command from LaTeX
+#let dboxed(con) = box(stroke: 0.5pt + black, outset: (x: 2pt), inset: (y: 8pt), baseline: 11pt, $display(#con)$)
+#let iboxed(con) = box(stroke: 0.5pt + black, outset: (x: 2pt), inset: (y: 3pt), baseline: 2pt, $#con$)
+
+// ==== Nice boxes using showybox and ctheorems packages ====
+//
+// | Environment | Accent Color         |
+// |-------------|----------------------|
+// | Definition  | olive                |
+// | Example     | purple               |
+// | Note        | blue                 |
+// | Attention   | red / rgb("#DC143C") |
+// | Quote       | black                |
+// | Theorem     | navy                 |  
+// | Proposition | maroon               |
+
+#let boxnumbering = "1.1.1.1.1.1"
+
+#let definition = thmenv(
+  "definition",
+  "Definition",
+  "heading",
+  none,
+  (name, number, body, ..args) => {
+    showybox(
+      title: [#name #h(1fr) Definition #number],
+      frame: (
+        border-color: olive,
+        title-color:  olive.lighten(30%),
+        body-color:   olive.lighten(95%),
+        footer-color: olive.lighten(80%),
+      ),
+      ..args.named(),
+      body
+    )
+  }
+).with(numbering: boxnumbering)
+
+#let example = thmenv(
+  "example",
+  "Example",
+  "heading",
+  none,
+  (name, number, body, ..args) => {
+    showybox(
+      title: [#name #h(1fr) Example #number],
+      frame: (
+        border-color: purple,
+        title-color:  purple.lighten(30%),
+        body-color:   purple.lighten(95%),
+        footer-color: purple.lighten(80%),
+      ),
+      ..args.named(),
+      body
+    )
+  }
+).with(numbering: boxnumbering)
+
+#let note = thmenv(
+  "note",
+  "Note",
+  "heading",
+  none,
+  (name, number, body, ..args) => {
+    showybox(
+      title: [#name #h(1fr) Note #number],
+      frame: (
+        border-color: blue,
+        title-color:  blue.lighten(30%),
+        body-color:   blue.lighten(95%),
+        footer-color: blue.lighten(80%),
+      ),
+      ..args.named(),
+      body
+    )
+  }
+).with(numbering: boxnumbering)
+
+#let attention = thmenv(
+  "attention",
+  "Attention",
+  "heading",
+  none,
+  (name, number, body, ..args) => {
+    showybox(
+      title: [#name #h(1fr) Attention #number],
+      frame: (
+        border-color: rgb("#DC143C"),
+        title-color:  rgb("#DC143C").lighten(30%),
+        body-color:   rgb("#DC143C").lighten(95%),
+        footer-color: rgb("#DC143C").lighten(80%),
+      ),
+      ..args.named(),
+      body
+    )
+  }
+).with(numbering: boxnumbering)
+
+#let quote = thmenv(
+  "quote",
+  "Quote",
+  "heading",
+  none,
+  (name, number, body, ..args) => {
+    showybox(
+      title: [#name #h(1fr) Quote #number],
+      frame: (
+        border-color: black,
+        title-color:  black.lighten(30%),
+        body-color:   black.lighten(95%),
+        footer-color: black.lighten(80%),
+      ),
+      ..args.named(),
+      body
+    )
+  }
+).with(numbering: boxnumbering)
+
+#let theorem = thmenv(
+  "theorem",
+  "Theorem",
+  "heading",
+  none,
+  (name, number, body, ..args) => {
+    showybox(
+      title: [#name #h(1fr) Theorem #number],
+      frame: (
+        border-color: navy,
+        title-color:  navy.lighten(30%),
+        body-color:   navy.lighten(95%),
+        footer-color: navy.lighten(80%),
+      ),
+      ..args.named(),
+      body
+    )
+  }
+).with(numbering: boxnumbering)
+
+#let proposition = thmenv(
+  "proposition",
+  "Proposition",
+  "heading",
+  none,
+  (name, number, body, ..args) => {
+    showybox(
+      title: [#name #h(1fr) Proposition #number],
+      frame: (
+        border-color: maroon,
+        title-color:  maroon.lighten(30%),
+        body-color:   maroon.lighten(95%),
+        footer-color: maroon.lighten(80%),
+      ),
+      ..args.named(),
+      body
+    )
+  }
+).with(numbering: boxnumbering)
