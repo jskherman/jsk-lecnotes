@@ -12,7 +12,7 @@ There are some custom functions that are defined in the [`template.typ`](./templ
 
 ## Usage
 
-1. Download a copy of the [`template.typ`](./template.typ) file and [`example.typ`](./example.typ) in [Releases](https://github.com/jskherman/jsk-lecnotes/releases/).
+1. Download a copy of the [`template.typ`](./template.typ) file and [`example.typ`](./example.typ).
 2. Copy these files to your project's root directory.
 3. Rename and customize the `example.typ` file to get started using the template.
 
