@@ -248,23 +248,30 @@
 
   // Display the lecture notes' last updated date.
   if date != none {
-    align(
-    center,
-    text(size: 11pt)[Published: ] +
+  align(center, table(
+    columns: (auto, auto),
+    stroke: none,
+    gutter: 0pt,
+    align: (right, left),
+    [#text(size: 11pt, "Published:")],
+    [#text(
+      size: 11pt,
+      fill: accent_color,
+      weight: "semibold",
+      date.display("[month repr:long] [day padding:zero], [year repr:full]")
+    )
+    ],
+    text(size: 11pt, "Last updated:"),
     text(
       size: 11pt,
       fill: accent_color,
       weight: "semibold",
-      date.display(
-        "[month repr:long] [day padding:zero], [year repr:full]"
-      )
+      datetime.today().display("[month repr:long] [day padding:zero], [year repr:full]")
     )
-  )
-  }
-  align(
-    center,
-    text(size: 11pt, "Last updated: ") +
-    text(
+  ))
+  } else {
+    align(center,
+    text(size: 11pt)[Last updated:#h(5pt)] + text(
       size: 11pt,
       fill: accent_color,
       weight: "semibold",
@@ -272,7 +279,8 @@
         "[month repr:long] [day padding:zero], [year repr:full]"
       )
     )
-  )
+    )
+  }
   v(18pt, weak: true)
 
   show outline.entry: it => {
