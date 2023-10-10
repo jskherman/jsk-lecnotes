@@ -6,7 +6,7 @@
   description: [
     Notes based on lectures for Phys 123 (Statistical Mechanics II)\ at Bicol University by Professor John Doe, Spring 2020
   ],
-  // date: datetime(year: 2023, month: 10, day: 01),
+  date: datetime(year: 2023, month: 10, day: 01),
   authors: (
     (
       name: "Je Sian Keith Herman",
@@ -25,8 +25,8 @@
   bibliography_file: "refs.bib",
   paper_size: "a4",
   columns: 1,
-  text_font: "EB Garamond",
-  code_font: "Cascadia Code",
+  text_font: "XCharter",
+  code_font: "Cascadia Mono",
   accent: "#DC143C", // blue
 )
 
