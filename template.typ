@@ -45,6 +45,8 @@
 
   // The path to a bibliography file if you want to cite some external works.
   bibliography_file: none,
+  // Citation style
+  bibstyle: "apa",
 
   // The article's paper size. Also affects the margins.
   paper_size: "a4",
@@ -103,6 +105,9 @@
   // Set the text and code font
   set text(font: text_font, size: 10pt)
   show raw: set text(font: code_font)
+
+  // Make links blue and underlined.
+  show link: it => { underline(stroke: (dash: "densely-dotted"), text(fill: blue, it)) }
 
   // Configure the page.
   set page(
@@ -212,7 +217,7 @@
         authors.map(author => {
           text(11pt, weight: "semibold")[
             #if "link" in author {
-              link(author.link)[#author.name]
+              underline(stroke: 2pt + white, link(author.link)[#text(fill: black, author.name)])
             } else {
               author.name
             }
@@ -330,7 +335,7 @@
   // Display bibliography.
   if bibliography_file != none {
     show bibliography: set text(8pt)
-    bibliography(bibliography_file, title: text(10pt)[References], style: "apa")
+    bibliography(bibliography_file, title: text(10pt)[References], style: bibstyle)
   }
 }
 
