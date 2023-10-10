@@ -1,7 +1,7 @@
 #import "../template.typ": *
 
 = Introduction
-Can you then _suppose_ that those heroic men performed their famous deeds *without any motive at all*? In a free hour, when our power of choice is untrammeled and when nothing prevents our being able to do what we like best, _*every pleasure is to be welcomed and every pain avoided*_ @netwok2020.
+Can you then _suppose_ that those heroic men performed their famous deeds *without any motive at all*? In a free hour, when our power of choice is untrammeled and when nothing prevents our being able to do what we like best, _*every pleasure is to be welcomed and for every pain avoided*_ @netwok2020.
 
 - But in certain emergencies and owing to the claims of duty or the obligations of business it will frequently occur that pleasures have to be repudiated and annoyances accepted.
   - #lorem(25)
