@@ -156,7 +156,7 @@
         align(right, "")
       } else {
         let body = elems.last().body
-        head_title + h(1fr) + emph(body)
+        emph(counter(heading.where(level: 1)).display("1. ") + body) + h(1fr) + head_title
         v(-7pt)
         line(length: 100%, stroke: (thickness: 1pt, paint: accent_color, dash: "solid"))
       }
