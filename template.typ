@@ -106,8 +106,19 @@
   set text(font: text_font, size: 10pt)
   show raw: set text(font: code_font)
 
-  // Make links blue and underlined.
-  show link: it => { underline(stroke: (dash: "densely-dotted"), text(fill: blue, it)) }
+  // Make links blue and underlined. Disable for author list.
+  show link: it => {
+    let author_names = ()
+    for author in authors {
+      author_names.push(author.name)
+    }
+
+    if it.body.has("text") and it.body.text in author_names {
+      it
+    } else {
+      underline(stroke: (dash: "densely-dotted"), text(fill: blue, it)) 
+    }
+  }
 
   // Configure the page.
   set page(
@@ -217,23 +228,19 @@
         authors.map(author => {
           text(11pt, weight: "semibold")[
             #if "link" in author {
-              underline(stroke: 2pt + white, link(author.link)[#text(fill: black, author.name)])
-            } else {
-              author.name
-            }
-          ]
+              [#link(author.link)[#author.name]]
+            } else { author.name }]
           if "affiliations" in author {
-            h(-1pt)
             super(author.affiliations)
           }
           if "orcid" in author {
-            link("https://orcid.org/" + author.orcid)[#box(height: 1.1em, baseline: 13.5%)[#image.decode(orcidSvg)]]
+            link("https://orcid.org/" + author.orcid, box(height: 1.1em, baseline: 13.5%)[#image.decode(orcidSvg)])
           }
         }).join(", ", last: {
           if authors.len() > 2 {
-            ", and "
+            ", and"
           } else {
-            " and "
+            " and"
           }
         })
       })
