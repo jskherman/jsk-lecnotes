@@ -52,7 +52,7 @@
   paper_size: "a4",
 
   // The number of columns to be used in the page
-  columns: 1,
+  cols: 1,
 
   // The text and code font. Must be a valid font name.
   text_font: "Linux Libertine",
@@ -123,11 +123,11 @@
   // Configure the page.
   set page(
     paper: paper_size,
-    columns: columns,
+    columns: cols,
     numbering: "1 / 1",
     number-align: center,
     // The margins depend on the paper size.
-    margin: if columns > 1 {
+    margin: if cols > 1 {
       (x: 36pt, y: 72pt)
     } else {
       auto

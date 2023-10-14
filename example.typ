@@ -24,7 +24,7 @@
   lol: false,
   bibliography_file: "refs.bib",
   paper_size: "a4",
-  columns: 1,
+  cols: 1,
   text_font: "XCharter",
   code_font: "Cascadia Mono",
   accent: "#DC143C", // blue
