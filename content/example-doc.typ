@@ -39,8 +39,6 @@ To take a trivial example, which of us ever undertakes laborious physical exerci
 
 1. On the other hand, we denounce with righteous indignation and dislike men who are so beguiled and demoralized by the charms of the pleasure of the moment, so blinded by desire, that they cannot foresee the pain and trouble that are bound to ensue; and equal blame belongs to those who fail in their duty through weakness of will, which is the same as saying through shrinking from toil and pain.
 
-  - #lorem(25)
-
 2. #lorem(25)
 
   1. #lorem(25)
@@ -64,4 +62,4 @@ To take a trivial example, which of us ever undertakes laborious physical exerci
   dboxed(integral.cont_(diff Sigma) bold(F) dot dif bold(Gamma)) $ 
 ] <stokes>
 
-#lorem(50)
+#lorem(30)
