@@ -387,11 +387,12 @@
 // | Proposition | maroon               |
 
 #let boxnumbering = "1.1.1.1.1.1"
+#let boxcounting = "heading"
 
 #let definition = thmenv(
   "definition",
   "Definition",
-  "heading",
+  boxcounting,
   none,
   (name, number, body, ..args) => {
     showybox(
@@ -411,7 +412,7 @@
 #let example = thmenv(
   "example",
   "Example",
-  "heading",
+  boxcounting,
   none,
   (name, number, body, ..args) => {
     showybox(
@@ -431,7 +432,7 @@
 #let note = thmenv(
   "note",
   "Note",
-  "heading",
+  boxcounting,
   none,
   (name, number, body, ..args) => {
     showybox(
@@ -451,7 +452,7 @@
 #let attention = thmenv(
   "attention",
   "Attention",
-  "heading",
+  boxcounting,
   none,
   (name, number, body, ..args) => {
     showybox(
@@ -471,7 +472,7 @@
 #let quote = thmenv(
   "quote",
   "Quote",
-  "heading",
+  boxcounting,
   none,
   (name, number, body, ..args) => {
     showybox(
@@ -491,7 +492,7 @@
 #let theorem = thmenv(
   "theorem",
   "Theorem",
-  "heading",
+  boxcounting,
   none,
   (name, number, body, ..args) => {
     showybox(
@@ -511,7 +512,7 @@
 #let proposition = thmenv(
   "proposition",
   "Proposition",
-  "heading",
+  boxcounting,
   none,
   (name, number, body, ..args) => {
     showybox(
