@@ -1,7 +1,7 @@
 // Imports =============================================================
 
 #import "@preview/whalogen:0.1.0": ce
-#import "@preview/codelst:1.0.0": sourcecode, codelst
+#import "@preview/codelst:2.0.1": sourcecode, codelst
 #import "@preview/showybox:2.0.1": showybox
 #import "@preview/ctheorems:1.0.0": *
 
