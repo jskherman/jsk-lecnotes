@@ -132,7 +132,7 @@
       } else {
         let current_heading = elems.last()
         if current_heading.numbering != none {
-          head_title + h(1fr) + emph("Lecture " + counter(heading.where(level: 1)).display("1: ") + current_heading.body)
+          head_title + h(1fr) + emph(h1-prefix + " " + counter(heading.where(level: 1)).display("1: ") + current_heading.body)
         } else {
           head_title + h(1fr) + emph(current_heading.body)
         }
