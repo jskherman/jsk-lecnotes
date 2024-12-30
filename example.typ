@@ -1,33 +1,31 @@
-                                        
-#import "template.typ": *
+#import "lib.typ": *
+
 #show: template.with(
-  title: [Quantum Mechanics, Brownian Motion,\ Ergodic Theory],
-  short_title: "Phys 123",
+  title: [Boiga Event Spaces, Distributions,\ Hypotheses Testing, and Statistical Tests],
+  short_title: "Probability II",
   description: [
-    Notes based on lectures for Phys 123 (Statistical Mechanics II)\ at Bicol University by Professor John Doe, Spring 2020
+    Notes based on lectures for Probability II (Engineering Data Analysis II)\ at the University of Chicago by Professor John Doe, Spring 2020
   ],
-  date: datetime(year: 2023, month: 10, day: 01),
+  date: datetime(year: 2024, month: 12, day: 25),
   authors: (
     (
       name: "Je Sian Keith Herman",
-      orcid: "0000-0002-3281-1292",
       link: "https://jskherman.com",
-      affiliations: "1,2",
     ),
   ),
-  affiliations: (
-    (id: "1", name: "Bicol University"),
-    (id: "2", name: "JSK Inc."),
-  ),
-  lof: false,
-  lot: false,
-  lol: false,
+  
+  // lof: true,
+  // lot: true,
+  // lol: true,
   bibliography_file: "refs.bib",
   paper_size: "a4",
+  // landscape: true,
   cols: 1,
-  text_font: "XCharter",
+  text_font: "STIX Two Text",
   code_font: "Cascadia Mono",
-  accent: "#DC143C", // blue
+  accent: "#1A41AC", // blue
+  h1-prefix: "Lecture",
+  colortab: true,
 )
 
-#include "content/example-doc.typ"
+#include "content/doc1.typ"

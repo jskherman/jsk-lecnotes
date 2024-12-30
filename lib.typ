@@ -1,9 +1,10 @@
 // Imports =============================================================
 
-#import "@preview/whalogen:0.1.0": ce
-#import "@preview/codelst:2.0.1": sourcecode, codelst
-#import "@preview/showybox:2.0.1": showybox
-#import "@preview/ctheorems:1.0.0": *
+#import "@preview/whalogen:0.2.0": ce
+#import "@preview/codly:1.1.1": codly-init, codly
+#import "@preview/codly-languages:0.1.1": codly-languages
+#import "@preview/showybox:2.0.3": showybox
+#import "@preview/ctheorems:1.1.3": thmenv, thmrules
 
 // Template ============================================================
 
@@ -27,15 +28,7 @@
   // Everything but but the name is optional.
   authors: (
       // name: "",
-      // orcid: "",
-      // link: "",
-      // affiliations: "1,2",
-  ),
-
-  // This is the affiliations list. Include an id and `name` in each affiliation. These are shown below the authors.
-  affiliations: (
-    // (id: "1", name: "Organization 1"),
-    // (id: "2", name: "Organization 2"),
+      // link: ""
   ),
 
   // Enable/disable the list of figures, tables, and listings.
@@ -50,27 +43,27 @@
 
   // The article's paper size. Also affects the margins.
   paper_size: "a4",
+  // page orientation
+  landscape: false,
 
   // The number of columns to be used in the page
   cols: 1,
 
   // The text and code font. Must be a valid font name.
-  text_font: "Linux Libertine",
+  text_font: "Libertinus Serif",
   code_font: "DejaVu Sans Mono",
 
   // The color of the lecture notes' accent color. Must be a valid HEX color.
   accent: "#DC143C",
+  h1-prefix: "Lecture",
+  colortab: false,
 
   // The lecture notes' content.
   body
 
 ) = {
-
   // Necessary for ctheorems package
   show: thmrules
-
-  // Logos
-  let orcidSvg = ```<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24"> <path fill="#AECD54" d="M21.8,12c0,5.4-4.4,9.8-9.8,9.8S2.2,17.4,2.2,12S6.6,2.2,12,2.2S21.8,6.6,21.8,12z M8.2,5.8c-0.4,0-0.8,0.3-0.8,0.8s0.3,0.8,0.8,0.8S9,7,9,6.6S8.7,5.8,8.2,5.8z M10.5,15.4h1.2v-6c0,0-0.5,0,1.8,0s3.3,1.4,3.3,3s-1.5,3-3.3,3s-1.9,0-1.9,0H10.5v1.1H9V8.3H7.7v8.2h2.9c0,0-0.3,0,3,0s4.5-2.2,4.5-4.1s-1.2-4.1-4.3-4.1s-3.2,0-3.2,0L10.5,15.4z"/></svg>```.text
 
   let accent_color = {
     if type(accent) == "string" {
@@ -100,8 +93,6 @@
   // Set document metadatra
   set document(title: str_title, author: authors.map(author => author.name))
 
-  set par(justify: false)
-
   // Set the text and code font
   set text(font: text_font, size: 10pt)
   show raw: set text(font: code_font)
@@ -112,11 +103,11 @@
     for author in authors {
       author_names.push(author.name)
     }
-
+    
     if it.body.has("text") and it.body.text in author_names {
       it
     } else {
-      underline(stroke: (dash: "densely-dotted"), text(fill: blue, it)) 
+      underline(stroke: (dash: "densely-dotted"), offset: 2pt, text(fill: accent_color, it)) 
     }
   }
 
@@ -124,49 +115,39 @@
   set page(
     paper: paper_size,
     columns: cols,
-    numbering: "1 / 1",
+    flipped: landscape,
+    numbering: "1",
     number-align: center,
-    // The margins depend on the paper size.
-    margin: if cols > 1 {
-      (x: 36pt, y: 72pt)
-    } else {
-      auto
-      // 72pt
-      // (x: 1.25in, y: 1in)
-    },
-    // if paper_size == "a4" {
-    //   (x: 41.5pt, top: 80.51pt, bottom: 89.51pt)
-    //   } else {
-    //     (
-    //       x: (50pt / 216mm) * 100%,
-    //       top: (55pt / 279mm) * 100%,
-    //       bottom: (64pt / 279mm) * 100%,
-    //     )
-    // },
-
-    header: locate(loc => {
+    header: context {
       let elems = query(
-        selector(heading.where(level: 1)).before(loc),
-        loc,
+        selector(heading.where(level: 1)).before(here())
       )
-      let head_title = text(fill: accent_color)[
-        #if short_title != none { short_title } else { str_title }
-      ]
-      if elems == () {
+      
+      let head_title = text(fill: accent_color, {
+        if short_title != none { short_title } else { str_title }
+      })
+      
+      if elems.len() == 0 {
         align(right, "")
       } else {
         let current_heading = elems.last()
         if current_heading.numbering != none {
-          emph(counter(heading.where(level: 1)).display("1. ") + current_heading.body) + h(1fr) + head_title
+          head_title + h(1fr) + emph("Lecture " + counter(heading.where(level: 1)).display("1: ") + current_heading.body)
         } else {
-          emph(current_heading.body) + h(1fr) + head_title
+          head_title + h(1fr) + emph(current_heading.body)
         }
-        v(-7pt)
+        v(-6pt)
         line(length: 100%, stroke: (thickness: 1pt, paint: accent_color, dash: "solid"))
       }
-    })
-  )
+    },
 
+  background: if colortab {
+      place(top + right, rect(fill: gradient.linear(angle: 45deg, white, accent_color), width: 100%, height: 1em))
+      // place(bottom + left, rect(fill: gradient.linear(angle: 45deg, accent_color, white), width: 100%, height: 1em))
+    } else { none }
+)
+
+  set text(10pt)
   // Configure equation numbering and spacing.
   set math.equation(numbering: "[1.1]")
   show math.equation: eq => {
@@ -179,26 +160,33 @@
   set list(indent: 0pt, body-indent: 6pt)
 
   // TODO: Configure headings
-  set heading(numbering: "1.1.1.1.1.")
+  // set heading(numbering: "1A.1A.1A.")
+  show selector(heading.where(level: 1)): set heading(numbering: 
+    (..nums) => h1-prefix + " " + nums
+      .pos()
+      .map(str)
+      .join(".") + ":" ,
+  )
+  show selector(heading.where(body: [Contents])).or(
+    heading.where(body: [List of Figures]).or(
+      heading.where(body: [List of Tables]).or(
+        heading.where(body: [List of Listings])
+      )
+    )
+  ): set heading(numbering: none)
+  show selector(heading.where(body: [References])): set heading(numbering: none)
+  
   show heading: it => {
     it
     v(12pt, weak: true)
   }
 
   // Configure code blocks.
-  show raw.where(
-    block: false,
-  ): it => box(fill: luma(240), inset: (x: 2pt), outset: (y: 3pt), radius: 1pt)[#it]
-  // show raw.where(
-  //   block: true,
-  // ): it => block(
-  //     breakable: false,
-  //     width: 100%,
-  //     fill: luma(240),
-  //     radius: 4pt,
-  //     inset: (x: 1.5em, y: 1em)
-  //   )[#it]
-  show: codelst(reversed: true)
+  show: codly-init.with()
+  codly(languages: codly-languages)
+  
+  show raw.where(block: false): it => box(fill: luma(236), inset: (x: 2pt), outset: (y: 3pt), radius: 1pt)[#it]
+  
 
   // Configure figures
   // set figure(placement: auto)
@@ -208,9 +196,12 @@
   show figure.where(
     kind: raw
   ): it => {
-    set block(width: 100%)
+    v(0.5em)
     it
+    v(0.5em) 
   }
+
+  // Create color tab at the upper right corner
 
   // Display the paper's title and description.
   align(center, [
@@ -234,12 +225,6 @@
             #if "link" in author {
               [#link(author.link)[#author.name]]
             } else { author.name }]
-          if "affiliations" in author {
-            super(author.affiliations)
-          }
-          if "orcid" in author {
-            link("https://orcid.org/" + author.orcid, box(height: 1.1em, baseline: 13.5%)[#image.decode(orcidSvg)])
-          }
         }).join(", ", last: {
           if authors.len() > 2 {
             ", and"
@@ -247,16 +232,6 @@
             " and"
           }
         })
-      })
-    }
-    #v(-2pt, weak: true)
-    #if affiliations.len() > 0 {
-      box(inset: (bottom: 10pt), {
-        affiliations.map(affiliation => {
-          text(8pt)[
-            #super(affiliation.id)#h(1pt)#affiliation.name
-          ]
-        }).join(", ")
       })
     }
   ]
@@ -300,40 +275,49 @@
   v(18pt, weak: true)
 
   show outline.entry: it => {
-    text(fill: accent_color)[#it]
+    text(fill: accent_color, it)
   }
 
   // Display the lecture notes' table of contents.
-  outline(indent: auto)
-  
-  if lof [
-    #v(3pt)
-    #outline(
-      indent: auto,
-      title: [List of Figures],
-      target: figure.where(kind: image),
-    )
-  ]
+  heading(level: 1, outlined: false)[Contents]
+  outline(indent: auto, title: none)
 
-  if lot [
-    #v(3pt)
-    #outline(
-      indent: auto,
-      title: [List of Tables],
-      target: figure.where(kind: table),
-    )
-  ]
-
-  if lol [
-    #v(3pt)
-    #outline(
-      indent: auto,
-      title: [List of Listings],
-      target: figure.where(kind: raw),
-    )
-  ]
+  if lof or lot or lol {
+    show heading.where(level: 1): set text(size:0.9em)
+    if lof {
+      v(4pt)
+      heading(level: 1)[List of Figures]
+      outline(
+        indent: auto,
+        title: none,
+        target: figure.where(kind: image),
+      )
+    }
   
-  v(24pt, weak: true)
+    if lot {
+      v(4pt)
+      heading(level: 1)[List of Tables]
+      outline(
+        indent: auto,
+        title: none,
+        target: figure.where(kind: table),
+      )
+    }
+  
+    if lol {
+      v(4pt)
+      heading(level: 1)[List of Listings]
+      outline(
+        indent: auto,
+        title: none,
+        target: figure.where(kind: raw),
+      )
+    }
+
+  align(center)[#v(1em) * \* #sym.space.quad \* #sym.space.quad \* *]
+  }
+  
+  v(2em, weak: true)
 
   // Set paragraph to be justified and set linebreaks
   set par(justify: true, linebreaks: "optimized", leading: 0.8em)
@@ -345,8 +329,8 @@
 
   // Display bibliography.
   if bibliography_file != none {
-    show bibliography: set text(8pt)
-    bibliography(bibliography_file, title: text(10pt)[References], style: bibstyle)
+    align(center)[#v(0.5em) * \* #sym.space.quad \* #sym.space.quad \* * #v(0.5em)]
+    bibliography(bibliography_file, title: [References], style: bibstyle)
   }
 }
 
@@ -369,14 +353,23 @@
 
 
 // Configure horizontal ruler
-#let horizontalrule = [#v(0.5em) #line(start: (20%,0%), end: (80%,0%)) #v(0.5em)]
+#let horizontalrule = {
+  v(1em)
+  line(start: (37%,0%), end: (63%,0%), stroke: stroke((thickness: 0.5pt, dash: "solid")))
+  v(1em)
+}
 
 // Configure alternative horizontal ruler
 #let sectionline = align(center)[#v(0.5em) * \* #sym.space.quad \* #sym.space.quad \* * #v(0.5em)]
 
 // Attempt to add \boxed{} command from LaTeX
-#let dboxed(con) = box(stroke: 0.5pt + black, outset: (x: 2pt), inset: (y: 8pt), baseline: 11pt, $display(#con)$)
-#let iboxed(con) = box(stroke: 0.5pt + black, outset: (x: 2pt), inset: (y: 3pt), baseline: 2pt, $#con$)
+#let dboxed(content) =  {
+    box(stroke: 0.5pt + black, outset: (x: 1pt, y: 8pt), inset: (x: 2pt, y: 1pt), baseline: 6pt, $display(#content)$)
+  } 
+  
+#let iboxed(content) = {
+    box(stroke: 0.5pt + black, outset: (x: 1pt, y: 3pt), inset: (x: 2pt, y: 1pt), baseline: 1pt, $#content$)
+  }
 
 // ==== Nice boxes using showybox and ctheorems packages ====
 //
@@ -389,18 +382,18 @@
 // | Quote       | black                |
 // | Theorem     | navy                 |  
 // | Proposition | maroon               |
+// | Hypothesis  | orange               |
 
 #let boxnumbering = "1.1.1.1.1.1"
 #let boxcounting = "heading"
 
 #let definition = thmenv(
-  "definition",
   "Definition",
   boxcounting,
   none,
   (name, number, body, ..args) => {
     showybox(
-      title: [#name #h(1fr) Definition #number],
+      title: [*#name* #h(1fr) Definition #number],
       frame: (
         border-color: olive,
         title-color:  olive.lighten(30%),
@@ -415,12 +408,11 @@
 
 #let example = thmenv(
   "example",
-  "Example",
   boxcounting,
   none,
   (name, number, body, ..args) => {
     showybox(
-      title: [#name #h(1fr) Example #number],
+      title: [*#name* #h(1fr) Example #number],
       frame: (
         border-color: purple,
         title-color:  purple.lighten(30%),
@@ -435,12 +427,11 @@
 
 #let note = thmenv(
   "note",
-  "Note",
   boxcounting,
   none,
   (name, number, body, ..args) => {
     showybox(
-      title: [#name #h(1fr) Note #number],
+      title: [*#name* #h(1fr) Note #number],
       frame: (
         border-color: blue,
         title-color:  blue.lighten(30%),
@@ -455,12 +446,11 @@
 
 #let attention = thmenv(
   "attention",
-  "Attention",
   boxcounting,
   none,
   (name, number, body, ..args) => {
     showybox(
-      title: [#name #h(1fr) Attention #number],
+      title: [*#name* #h(1fr) Attention #number],
       frame: (
         border-color: rgb("#DC143C"),
         title-color:  rgb("#DC143C").lighten(30%),
@@ -475,12 +465,11 @@
 
 #let quote = thmenv(
   "quote",
-  "Quote",
   boxcounting,
   none,
   (name, number, body, ..args) => {
     showybox(
-      title: [#name #h(1fr) Quote #number],
+      title: [*#name* #h(1fr) Quote #number],
       frame: (
         border-color: black,
         title-color:  black.lighten(30%),
@@ -495,12 +484,11 @@
 
 #let theorem = thmenv(
   "theorem",
-  "Theorem",
   boxcounting,
   none,
   (name, number, body, ..args) => {
     showybox(
-      title: [#name #h(1fr) Theorem #number],
+      title: [*#name* #h(1fr) Theorem #number],
       frame: (
         border-color: navy,
         title-color:  navy.lighten(30%),
@@ -514,18 +502,37 @@
 ).with(numbering: boxnumbering)
 
 #let proposition = thmenv(
-  "proposition",
   "Proposition",
   boxcounting,
   none,
   (name, number, body, ..args) => {
     showybox(
-      title: [#name #h(1fr) Proposition #number],
+      title: [*#name* #h(1fr) Proposition #number],
       frame: (
         border-color: maroon,
         title-color:  maroon.lighten(30%),
         body-color:   maroon.lighten(95%),
         footer-color: maroon.lighten(80%),
+      ),
+      ..args.named(),
+      body
+    )
+  }
+).with(numbering: boxnumbering)
+
+
+#let hypothesis = thmenv(
+  "hypothesis",
+  boxcounting,
+  none,
+  (name, number, body, ..args) => {
+    showybox(
+      title: [*#name* #h(1fr) Hypothesis #number],
+      frame: (
+        border-color: orange,
+        title-color:  orange.lighten(10%),
+        body-color:   orange.lighten(95%),
+        footer-color: orange.lighten(80%),
       ),
       ..args.named(),
       body
