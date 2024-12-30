@@ -28,4 +28,4 @@
   colortab: true,
 )
 
-#include "content/doc1.typ"
+#include "content/exampledoc.typ"
